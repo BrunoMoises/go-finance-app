@@ -8,5 +8,6 @@ export default createGlobalStyle`
     }
     body {
         background-color: ${(props) => props.theme.colors.black2};
+        color: ${(props) => props.theme.colors.white};
     }
 `;
