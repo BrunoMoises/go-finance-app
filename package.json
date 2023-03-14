@@ -20,5 +20,8 @@
     "react-dom": "18.2.0",
     "styled-components": "^5.3.9",
     "typescript": "4.9.5"
+  },
+  "devDependencies": {
+    "babel-plugin-components": "^1.0.4"
   }
 }
