@@ -7,5 +7,6 @@ export const darkTheme = {
         black1: '#131212',
         black2: '#171616',
         black3: '#1E1E1E',
+        white: '#fff'
     }
 };
