@@ -12,7 +12,7 @@ export const Chart = () => {
                 innerRadius={100}
                 colorScale={["tomato", "orange"]}
                 padAngle={5}
-                style={{ labels: { display: "none" } }}
+                style={{ labels: { display: "none" }, parent: { width: 500 } }}
             />
             {subtitleLabel.map(subtitle => (
                 <Subtitle key={subtitle.color} color={subtitle.color}>
