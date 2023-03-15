@@ -1,6 +1,8 @@
+import { Card } from "../components/Card";
+
 const Home = () => (
   <>
-    hello
+    <Card title="Saldo a pagar" value="R$ 10.000,00" />
   </>
 );
 
