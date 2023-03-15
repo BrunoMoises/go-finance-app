@@ -7,11 +7,6 @@ export const Container = styled.div`
     justify-content: space-between;
 `;
 
-export const Header = styled.div`
-    width: 93px;
-    height: 100%;
-`;
-
 export const Main = styled.div`
     width: 100%;
     height: 100%;
