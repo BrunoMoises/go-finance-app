@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import { Header } from '../Header';
 import { Container, Main } from './styles'
@@ -7,9 +8,11 @@ interface AppTemplateProps {
 }
 
 const AppTemplate = ({ children }: AppTemplateProps) => {
+  const { pathname } = useRouter()
+  const isAuthPages = pathname == '/Signin' || pathname == '/Signup'
   return (
     <Container>
-        <Header />
+      {!isAuthPages && <Header />}
       <Main>
         {children}
       </Main>
