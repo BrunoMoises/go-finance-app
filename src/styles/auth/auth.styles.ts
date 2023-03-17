@@ -49,3 +49,13 @@ export const Content = styled.div`
         }
     }
 `
+
+export const ErrorMessage = styled.span`
+    background-color: red;
+    padding: 10px;
+    font-size: 16px;
+    width: 491px;
+    text-align: center;
+    border-radius: 8px;
+    font-weight: bold;
+`
