@@ -4,6 +4,8 @@ import logo from '../../assets/logo.png'
 import Link from "next/link"
 import { useState } from "react"
 import { useRouter } from "next/router"
+import api from "@/src/services/api"
+import useLogin from "@/src/Hooks/useLogin"
 
 const Signup = () => {
   const [username, setUsername] = useState("");
@@ -16,6 +18,7 @@ const Signup = () => {
   const buttonLabel = isLoading ? "Carregando..." : "Cadastrar";
   const router = useRouter()
   const passwordIsValid = password == confirmPassword;
+  const { login } = useLogin();
   const signup = async () => {
     try {
       setIsLoading(true);
@@ -23,15 +26,12 @@ const Signup = () => {
         setHasError(true);
         throw Error();
       }
-      await fetch("http://localhost:8000/user", {
-        method: "POST",
-        mode: "no-cors",
-        body: JSON.stringify({
-          username,
-          email,
-          password,
-        })
+      await api.post("/user", {
+        username,
+        email,
+        password,
       });
+      await login({ username, password });
       router.push("/");
     } catch (err) {
       if (!passwordIsValid)
@@ -67,12 +67,12 @@ const Signup = () => {
       <Content>
         <Image src={logo} alt="GoFinance" width={150} />
         {InputProps.map((prop) => (
-        <input
-          key={prop.placeholder}
-          type={prop.type}
-          placeholder={prop.placeholder}
-          onChange={(e) => prop.setState(e.target.value)}
-        />
+          <input
+            key={prop.placeholder}
+            type={prop.type}
+            placeholder={prop.placeholder}
+            onChange={(e) => prop.setState(e.target.value)}
+          />
         ))}
         <button onClick={signup}>{buttonLabel}</button>
         {hasError && <ErrorMessage>{errorMessage}</ErrorMessage>}
