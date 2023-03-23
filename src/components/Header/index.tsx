@@ -4,8 +4,10 @@ import debit from '../../assets/debit.png'
 import receipt from '../../assets/receipt.png'
 import debitCategories from '../../assets/debitCategories.png'
 import receiptCategories from '../../assets/receiptCategories.png'
+import logoutImage from '../../assets/logout.png'
 import Link from "next/link"
 import Image from "next/image"
+import useLogin from "@/src/Hooks/useLogin"
 
 const menuItens = [
     {
@@ -31,6 +33,7 @@ const menuItens = [
 ]
 
 export const Header = () => {
+    const {logout} = useLogin()
     return (
         <Container>
             <Link href="/">
@@ -43,6 +46,7 @@ export const Header = () => {
                     </Link>
                 ))}
             </MenuItens>
+            <Image id="logout" src={logoutImage} alt="Logout" width={30} onClick={logout} />
         </Container>
     )
 }
