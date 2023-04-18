@@ -14,6 +14,7 @@ type AuthProviderProps = {
 };
 
 type AuthState = {
+    user_id?: number;
     token: string;
 };
 
@@ -23,7 +24,8 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     const [data, setData] = useState<AuthState | undefined>(() => {
         if (typeof window === "undefined") return {} as AuthState;
         const token = localStorage.getItem("@gofinance:token");
-        if (token) {
+        const user_id = localStorage.getItem("@gofinance:user_id");
+        if (token && user_id) {
             api.defaults.headers.authorization = `Bearer ${token}`;
             return { token };
         }
@@ -44,19 +46,24 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
                 username,
                 password,
             });
-            const accessToken = response.data;
-            localStorage.setItem("@gofinance:token", accessToken);
-            api.defaults.headers.authorization = `Bearer ${accessToken}`;
+            const { user_id, token } = response.data;
+            localStorage.setItem("@gofinance:token", token);
+            localStorage.setItem("@gofinance:user_id", user_id);
+            api.defaults.headers.authorization = `Bearer ${token}`;
             router.replace(origin);
-            if (!accessToken) {
+            if (!token) {
                 setData(undefined);
             }
-            setData({ token: accessToken });
+            setData({
+                user_id: user_id,
+                token: token
+            });
         },
         [origin, router]
     );
     const logout = useCallback(() => {
         localStorage.removeItem("@gofinance:token");
+        localStorage.removeItem("@gofinance:user_id");
         delete api.defaults.headers.authorization;
         setData(undefined);
     }, []);
