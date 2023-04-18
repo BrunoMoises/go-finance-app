@@ -5,6 +5,7 @@ import {TableLine} from "@/src/components/TableLine";
 import {useEffect, useState} from "react";
 import {TableNavBar} from "@/src/components/TableNavBar";
 import api from "@/src/services/api";
+import {toast} from "react-toastify";
 
 const teste = [
     {
@@ -23,8 +24,8 @@ const teste = [
 
 const ReceiptCategories = () => {
     const [userId, setUserId] = useState<string | null>();
-    const [title, setTitle] = useState();
-    const [description, setDescription] = useState();
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
     useEffect(() => {
         const user_id = localStorage.getItem("@gofinance:user_id")
         setUserId(user_id)
@@ -37,8 +38,9 @@ const ReceiptCategories = () => {
                 description,
                 type: 'receipt'
             })
+            toast.success('Categoria criada com sucesso!')
         } catch {
-
+            toast.error('Erro ao criar categoria!')
         }
     }
     return (
