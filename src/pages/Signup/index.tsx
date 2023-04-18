@@ -6,6 +6,7 @@ import { useState } from "react"
 import { useRouter } from "next/router"
 import api from "@/src/services/api"
 import useLogin from "@/src/Hooks/useLogin"
+import {toast} from "react-toastify";
 
 const Signup = () => {
   const [username, setUsername] = useState("");
@@ -54,6 +55,7 @@ const Signup = () => {
       await login({ username, password });
       router.push("/");
     } catch (err: any) {
+      toast.error("Não foi possível efetuar cadastro.")
       const userAlreadyExists = err.response?.status === 500
       const hasEmptyInput = err.response?.status === 400
       if (userAlreadyExists)
