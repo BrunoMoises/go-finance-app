@@ -4,6 +4,7 @@ import logo from '../../assets/logo.png'
 import Link from "next/link"
 import { useState } from "react"
 import useLogin from "@/src/Hooks/useLogin"
+import {toast} from "react-toastify";
 
 const Signin = () => {
   const { login } = useLogin();
@@ -14,6 +15,7 @@ const Signin = () => {
     try {
       await login({username, password});
     } catch (error: any) {
+      toast.error("Não foi possível efetuar login.")
       const userNotFound = error.response?.status === 404;
       const invalidCredentialsNotFound = error.response?.status === 401;
       if (userNotFound)
