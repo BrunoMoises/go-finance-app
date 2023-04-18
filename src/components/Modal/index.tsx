@@ -1,12 +1,12 @@
 import {Container, OutsideContainer} from "@/src/components/Modal/styles";
-import {useRef, useState} from "react";
+import React, {useRef, useState} from "react";
 import {ModalProps} from "@/src/components/TableNavBar";
 
 const Modal = ({title, buttonTitle, setTitle, setDescription, createCategoryHandle}: ModalProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const outsideContainerRef = useRef(null);
     const openModal = () => setIsOpen(true)
-    const closeModal = (e: any) => {
+    const closeModal = (e: React.MouseEvent<HTMLElement>) => {
         if (e.target == outsideContainerRef.current) {
             setIsOpen(false)
         }
