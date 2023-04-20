@@ -29,7 +29,7 @@ const ReceiptCategories = () => {
     useEffect(() => {
         const user_id = localStorage.getItem("@gofinance:user_id")
         setUserId(user_id)
-        listReceiptCategories(user_id)
+        listReceiptCategories(user_id).then()
     }, [userId, listReceiptCategories]);
     const createCategoryHandle = useCallback(async () => {
         try {
@@ -39,7 +39,7 @@ const ReceiptCategories = () => {
                 description,
                 type: 'receipt'
             })
-            listReceiptCategories(userId)
+            await listReceiptCategories(userId)
             toast.success('Categoria criada com sucesso!')
         } catch {
             toast.error('Erro ao criar categoria!')
